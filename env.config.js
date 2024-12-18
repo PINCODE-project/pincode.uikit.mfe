@@ -7,7 +7,7 @@ const outputConfig = {
 const entryConfig = ["./src/index.tsx"];
 
 const copyPluginPatterns = {
-    patterns: [{ from: "./public" }],
+    patterns: [{ from: "./public" }, { from: "./build" }],
 };
 
 const devServer = {
