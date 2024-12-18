@@ -14,7 +14,7 @@ const federationConfig = {
     exposes: {
         "./Global": "./src/styles/globals.scss",
         "./Accordion": "./src/components/ui/accordion",
-        "./Alert": "./src/components/ui/Alert",
+        "./Alert": "./src/components/ui/alert",
         "./AlertDialog": "./src/components/ui/alert-dialog",
         "./AspectRatio": "./src/components/ui/aspect-ratio",
         "./Avatar": "./src/components/ui/avatar",
