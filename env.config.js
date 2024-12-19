@@ -7,7 +7,7 @@ const outputConfig = {
 const entryConfig = ["./src/index.tsx"];
 
 const copyPluginPatterns = {
-    patterns: [{ from: "./public" }, path.resolve(__dirname, "build", "@mf-types.zip")],
+    patterns: [{ from: "./public/logo192.png" }, path.resolve(__dirname, "build", "@mf-types.zip")],
 };
 
 const devServer = {
