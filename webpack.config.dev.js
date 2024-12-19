@@ -146,7 +146,7 @@ module.exports = (env, options) => {
         output: {
             filename: "js/[name].bundle.js",
             path: path.resolve(__dirname, outputConfig.destPath),
-            publicPath: "https://pincode-dev.ru/ui/",
+            publicPath: "https://pincode-dev.ru/ui",
         },
         plugins: [
             new HtmlWebpackPlugin({
@@ -156,7 +156,7 @@ module.exports = (env, options) => {
             }),
             new ModuleFederationPlugin(federationConfig),
             NativeFederationTypeScriptRemote({ moduleFederationConfig: federationConfig }),
-            // new CopyPlugin(copyPluginPatterns),
+            new CopyPlugin(copyPluginPatterns),
         ],
     };
 };
