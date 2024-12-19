@@ -146,7 +146,7 @@ module.exports = (env, options) => {
         output: {
             filename: "js/[name].bundle.js",
             path: path.resolve(__dirname, outputConfig.destPath),
-            publicPath: "https://pincode-ui.netlify.app/",
+            publicPath: "https://pincode-dev.ru/ui/",
         },
         plugins: [
             new HtmlWebpackPlugin({
