@@ -7,7 +7,7 @@ services:
       dockerfile: Dockerfile
     restart: always
     ports:
-      - "3050:3000"
+      - "3050:5001"
     networks:
       - pincode_uikit_mfe_network
 
