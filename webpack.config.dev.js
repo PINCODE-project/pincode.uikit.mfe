@@ -162,7 +162,7 @@ module.exports = (env, options) => {
             }),
             new ModuleFederationPlugin(federationConfig),
             NativeFederationTypeScriptRemote({ moduleFederationConfig: federationConfig }),
-            // new CopyPlugin(copyPluginPatterns),
+            new CopyPlugin(copyPluginPatterns),
         ],
     };
 };
