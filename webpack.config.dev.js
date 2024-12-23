@@ -161,7 +161,9 @@ module.exports = (env, options) => {
                 minify: false,
             }),
             new ModuleFederationPlugin(federationConfig),
-            NativeFederationTypeScriptRemote({ moduleFederationConfig: federationConfig }),
+            NativeFederationTypeScriptRemote({
+                moduleFederationConfig: federationConfig,
+            }),
             new CopyPlugin(copyPluginPatterns),
         ],
     };
