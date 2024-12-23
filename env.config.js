@@ -13,7 +13,6 @@ const copyPluginPatterns = {
 const devServer = {
     static: [
         { directory: path.join(__dirname, outputConfig.destPath), },
-        { directory: path.join(__dirname, "./build"), },
     ],
     port: "5001",
     historyApiFallback: true,
