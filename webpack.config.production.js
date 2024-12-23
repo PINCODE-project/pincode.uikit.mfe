@@ -5,9 +5,11 @@ const CopyPlugin = require("copy-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const { outputConfig, copyPluginPatterns, scssConfig, entryConfig, terserPluginConfig } = require("./env.config");
-const { NativeFederationTypeScriptRemote } = require("@module-federation/native-federation-typescript/dist/webpack");
+// const { NativeFederationTypeScriptRemote } = require("@module-federation/native-federation-typescript/dist/webpack");
 
 const { ModuleFederationPlugin } = require("webpack").container;
+
+const deps = require("./package.json").dependencies;
 
 const federationConfig = {
     name: "ui",
@@ -75,6 +77,9 @@ module.exports = (env, options) => {
     return {
         mode: options.mode,
         entry: entryConfig,
+        exports: {
+            "./dist/webpack": "./dist/webpack.js"
+        },
         module: {
             rules: [
                 {
@@ -158,7 +163,7 @@ module.exports = (env, options) => {
                 minify: true,
             }),
             new ModuleFederationPlugin(federationConfig),
-            NativeFederationTypeScriptRemote({ moduleFederationConfig: federationConfig }),
+            // NativeFederationTypeScriptRemote({ moduleFederationConfig: federationConfig }),
         ],
     };
 };

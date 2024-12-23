@@ -10,7 +10,7 @@ import { Book, FileText } from "lucide-react";
 const ButtonArticle: ArticleContent[] = [
     { type: "heading", level: 1, content: "Welcome to Our Enhanced Documentation" },
     { type: "paragraph", content: "This is an example of our Markdown-like article renderer with new features." },
-    { type: "heading", level: 2, content: "Features" },
+    { type: "heading", level: 2, content: "Featuress" },
     {
         type: "list",
         ordered: false,

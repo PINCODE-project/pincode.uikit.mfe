@@ -18,7 +18,7 @@ import {
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import { ComponentsRouter } from "@/router/routes/components";
 import { Link } from "react-router-dom";
-import ThemeToggle from "@/components/ui/theme-toggle";
+import { ThemeToggle } from "@/components/ui/theme-toggle";
 
 const navItems = [
     {

@@ -26,7 +26,7 @@ export function ComponentVariator({ config, component: Component }: ComponentVar
     };
 
     return (
-        <div className="space-y-6">
+        <div className="space-y-6 mt-6">
             <Card>
                 <CardContent className="pt-6">
                     <div className="grid gap-6" style={{ gridTemplateColumns: `2fr 1fr` }}>

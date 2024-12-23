@@ -61,7 +61,13 @@ const federationConfig = {
         "./Toggle": "./src/components/ui/toggle",
         "./ToggleGroup": "./src/components/ui/toggle-group",
         "./Tooltip": "./src/components/ui/tooltip",
+        "./Marquee": "./src/components/ui/marquee",
         "./Article": "./src/components/ui/article/Article",
+        "./Article/Heading": "./src/components/ui/article/Heading",
+        "./Article/Tabs": "./src/components/ui/article/Tabs",
+        "./SignVideo": "./src/components/ui/sign-video",
+        "./ThemeToggle": "./src/components/ui/theme-toggle",
+        "./SignRecognitionBlock": "./src/components/ui/sign-recognition-block",
     },
     shared: {
         react: { requiredVersion: deps.react, singleton: true },
@@ -146,7 +152,7 @@ module.exports = (env, options) => {
         output: {
             filename: "js/[name].bundle.js",
             path: path.resolve(__dirname, outputConfig.destPath),
-            publicPath: "https://pincode-dev.ru/ui",
+            publicPath: "https://pincode-ui.netlify.app/",
         },
         plugins: [
             new HtmlWebpackPlugin({
@@ -156,7 +162,7 @@ module.exports = (env, options) => {
             }),
             new ModuleFederationPlugin(federationConfig),
             NativeFederationTypeScriptRemote({ moduleFederationConfig: federationConfig }),
-            new CopyPlugin(copyPluginPatterns),
+            // new CopyPlugin(copyPluginPatterns),
         ],
     };
 };

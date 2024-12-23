@@ -32,6 +32,7 @@ type SidebarContext = {
   setOpenMobile: (open: boolean) => void
   isMobile: boolean
   toggleSidebar: () => void
+
 }
 
 const SidebarContext = React.createContext<SidebarContext | null>(null)
@@ -50,7 +51,7 @@ const SidebarProvider = React.forwardRef<
   React.ComponentProps<"div"> & {
     defaultOpen?: boolean
     open?: boolean
-    onOpenChange?: (open: boolean) => void
+    onOpenChange?: (open: boolean) => void,
   }
 >(
   (

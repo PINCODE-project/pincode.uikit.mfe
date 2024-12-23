@@ -5,13 +5,15 @@ import { Moon, Sun } from "lucide-react";
 const ThemeToggle: React.FC = () => {
     const [isDarkMode, setIsDarkMode] = useState<boolean>(() => {
         // Проверяем начальное состояние на основе класса body
-        return document.body.classList.contains("dark");
+        return localStorage.getItem("theme") === "dark";
     });
 
     const toggleTheme = () => {
         if (isDarkMode) {
+            localStorage.setItem("theme", "light");
             document.body.classList.remove("dark");
         } else {
+            localStorage.setItem("theme", "dark");
             document.body.classList.add("dark");
         }
         setIsDarkMode(!isDarkMode);
@@ -19,8 +21,10 @@ const ThemeToggle: React.FC = () => {
 
     useEffect(() => {
         if (isDarkMode) {
+            localStorage.setItem("theme", "dark");
             document.body.classList.add("dark");
         } else {
+            localStorage.setItem("theme", "light");
             document.body.classList.remove("dark");
         }
     }, [isDarkMode]);
@@ -34,4 +38,4 @@ const ThemeToggle: React.FC = () => {
     );
 };
 
-export default ThemeToggle;
+export { ThemeToggle };
