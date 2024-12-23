@@ -1,11 +1,8 @@
 const path = require("path");
-const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
-const TerserPlugin = require("terser-webpack-plugin");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const { outputConfig, copyPluginPatterns, scssConfig, entryConfig, terserPluginConfig } = require("./env.config");
-// const { NativeFederationTypeScriptRemote } = require("@module-federation/native-federation-typescript/dist/webpack");
+const { NativeFederationTypeScriptRemote } = require("@module-federation/native-federation-typescript/webpack");
+const { outputConfig, copyPluginPatterns, entryConfig, devServer } = require("./env.config");
 
 const { ModuleFederationPlugin } = require("webpack").container;
 
@@ -17,7 +14,7 @@ const federationConfig = {
     exposes: {
         "./Global": "./src/styles/globals.scss",
         "./Accordion": "./src/components/ui/accordion",
-        "./Alert": "./src/components/ui/Alert",
+        "./Alert": "./src/components/ui/alert",
         "./AlertDialog": "./src/components/ui/alert-dialog",
         "./AspectRatio": "./src/components/ui/aspect-ratio",
         "./Avatar": "./src/components/ui/avatar",
@@ -64,7 +61,13 @@ const federationConfig = {
         "./Toggle": "./src/components/ui/toggle",
         "./ToggleGroup": "./src/components/ui/toggle-group",
         "./Tooltip": "./src/components/ui/tooltip",
+        "./Marquee": "./src/components/ui/marquee",
         "./Article": "./src/components/ui/article/Article",
+        "./Article/Heading": "./src/components/ui/article/Heading",
+        "./Article/Tabs": "./src/components/ui/article/Tabs",
+        "./SignVideo": "./src/components/ui/sign-video",
+        "./ThemeToggle": "./src/components/ui/theme-toggle",
+        "./SignRecognitionBlock": "./src/components/ui/sign-recognition-block",
     },
     shared: {
         react: { requiredVersion: deps.react, singleton: true },
@@ -77,9 +80,6 @@ module.exports = (env, options) => {
     return {
         mode: options.mode,
         entry: entryConfig,
-        exports: {
-            "./dist/webpack": "./dist/webpack.js"
-        },
         module: {
             rules: [
                 {
@@ -90,8 +90,13 @@ module.exports = (env, options) => {
                 {
                     test: /\.scss$/,
                     use: [
-                        MiniCssExtractPlugin.loader,
-                        "css-loader",
+                        "style-loader",
+                        {
+                            loader: "css-loader",
+                            options: {
+                                url: false,
+                            },
+                        },
                         {
                             loader: "postcss-loader",
                             options: {
@@ -145,25 +150,16 @@ module.exports = (env, options) => {
         output: {
             filename: "js/[name].bundle.js",
             path: path.resolve(__dirname, outputConfig.destPath),
-            publicPath: "auto",
-        },
-        optimization: {
-            minimizer: [new TerserPlugin(terserPluginConfig)],
-            splitChunks: {
-                chunks: "all",
-            },
+            publicPath: "https://pincode-ui.netlify.app/",
         },
         plugins: [
-            new CleanWebpackPlugin(),
-            new CopyPlugin(copyPluginPatterns),
-            new MiniCssExtractPlugin({ filename: scssConfig.destFileName }),
             new HtmlWebpackPlugin({
-                template: "./src/index.html",
+                template: "./public/index.html",
                 inject: true,
-                minify: true,
+                minify: false,
             }),
             new ModuleFederationPlugin(federationConfig),
-            // NativeFederationTypeScriptRemote({ moduleFederationConfig: federationConfig }),
+            new CopyPlugin(copyPluginPatterns),
         ],
     };
 };
