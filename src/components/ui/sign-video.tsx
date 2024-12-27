@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { FastForward, Fullscreen, Rewind } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 type Props = {
     source: string;
@@ -12,6 +13,7 @@ type Props = {
 };
 
 const SignVideo: FC<Props> = ({ source, className, ratio, extraButtons }) => {
+    const isMobile = useIsMobile()
     const videoRef = useRef<HTMLVideoElement>(null);
     const [speed, setSpeed] = useState(1);
 
@@ -87,11 +89,15 @@ const SignVideo: FC<Props> = ({ source, className, ratio, extraButtons }) => {
                     </div>
 
                     <div className="flex items-end gap-2">
-                        {extraButtons}
+                        {!isMobile && extraButtons}
                         <Button variant="outline" size="icon" onClick={fullscreen} title="Полный экран">
                             <Fullscreen className="h-4 w-4" />
                         </Button>
                     </div>
+                </div>
+
+                <div className="mt-4">
+                    {isMobile && extraButtons}
                 </div>
             </div>
         </div>

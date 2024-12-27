@@ -7,7 +7,7 @@ const outputConfig = {
 const entryConfig = ["./src/index.tsx"];
 
 const copyPluginPatterns = {
-    patterns: [{ from: "./public/logo192.png" }, { from: "./public/logo512.png" }, { from: "./public/favicon.ico" }, { from: "./build/" }],
+    patterns: [{ from: "./public/logo192.png" }, { from: "./public/logo512.png" }, { from: "./public/favicon.ico" }, { from: "./public/_redirects" }],
 };
 
 const devServer = {
