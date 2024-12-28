@@ -7,11 +7,12 @@ import { cn } from "@/lib/utils";
 
 interface SignRecognitionProps {
     word: string;
+    recognitionText: string[];
     onSuccess?: () => void;
     className?: string;
 }
 
-function SignRecognitionBlock({ word, onSuccess, className }: SignRecognitionProps) {
+function SignRecognitionBlock({ word, recognitionText, onSuccess, className }: SignRecognitionProps) {
     const [recognizedSigns, setRecognizedSigns] = useState<string[]>([]);
     const [isLoading, setIsLoading] = useState(true);
     const [selectedDevice, setSelectedDevice] = useState<string>("default");
@@ -30,23 +31,32 @@ function SignRecognitionBlock({ word, onSuccess, className }: SignRecognitionPro
             console.log("Connected to recognition server");
         });
 
-        socketRef.current.on("send_not_normalize_text", (data: string) => {
-            try {
-                const results: string[] = Object.values(JSON.parse(data));
-                const newSign = results[0]?.toLowerCase();
-
-                if (newSign && recognizedSigns[recognizedSigns.length - 1] !== newSign) {
-                    setRecognizedSigns((prev) => [...prev, newSign].slice(-6));
-                }
-            } catch (error) {
-                console.error("Error parsing recognition data:", error);
-            }
-        });
-
         return () => {
             socketRef.current?.disconnect();
         };
     }, []);
+
+    const onReceiveText = useCallback((data: string) => {
+        try {
+            const results: string[] = Object.values(JSON.parse(data));
+            const newSign = results[0]?.toLowerCase();
+
+            console.log(results, newSign, recognizedSigns);
+
+            if (newSign && recognizedSigns[recognizedSigns.length - 1] !== newSign) {
+                setRecognizedSigns((prev) => [...prev, newSign].slice(-6));
+            }
+        } catch (error) {
+            console.error("Error parsing recognition data:", error);
+        }
+    }, [recognizedSigns]);
+
+    useEffect(() => {
+        socketRef.current?.on("send_not_normalize_text", onReceiveText);
+        return () => {
+            socketRef.current?.off("send_not_normalize_text", onReceiveText);
+        };
+    }, [onReceiveText]);
 
     useEffect(() => {
         async function getDevices() {
@@ -182,8 +192,8 @@ function SignRecognitionBlock({ word, onSuccess, className }: SignRecognitionPro
                             <span
                                 key={index}
                                 className={cn(
-                                    "px-2.5 py-1 rounded-full text-sm font-medium",
-                                    sign.toLowerCase() === word.toLowerCase()
+                                    "px-2.5 py-1 rounded-full text-sm font-medium slide-in-from-bottom animate-in",
+                                     recognitionText.some(text => text.toLowerCase() === sign.toLowerCase())
                                         ? "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-100"
                                         : "bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-100",
                                 )}
