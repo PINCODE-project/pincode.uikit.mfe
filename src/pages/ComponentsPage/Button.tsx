@@ -1,9 +1,9 @@
-import { ArticleContent } from "@/components/ui/article/Article";
-import { InlineCode } from "@/components/ui/article/InlineCode";
-import { CodeBlock } from "@/components/ui/article/CodeBlock";
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
-import { Card, CardContent } from "@/components/ui/card";
-import { LiveComponent } from "@/components/ui/article/LiveComponent";
+import { ArticleContent } from "@pin-code/uikit.lib";
+import { InlineCode } from "@pin-code/uikit.lib";
+import { CodeBlock } from "@pin-code/uikit.lib";
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@pin-code/uikit.lib";
+import { Card, CardContent } from "@pin-code/uikit.lib";
+import { LiveComponent } from "@pin-code/uikit.lib";
 import { ButtonVariator } from "@/components/ComponentVariator/ButtonVariator";
 import { Book, FileText } from "lucide-react";
 

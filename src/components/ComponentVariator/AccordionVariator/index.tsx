@@ -1,6 +1,6 @@
-import { ComponentVariator } from "@/components/ui/component-variator/ComponentVariator";
-import type { ComponentConfig } from "@/components/ui/component-variator/types";
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import { ComponentVariator } from "@pin-code/uikit.lib";
+import type { ComponentConfig } from "@pin-code/uikit.lib";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@pin-code/uikit.lib";
 
 const accordionConfig: ComponentConfig = {
     name: "Accordion",
@@ -15,20 +15,20 @@ const accordionConfig: ComponentConfig = {
                 { label: "Single", value: "single" },
                 { label: "Multiple", value: "multiple" },
             ],
-            codeTemplate: (value) => `type="${value}"`,
+            codeTemplate: (value: string) => `type="${value}"`,
         },
         {
             id: "collapsible",
             label: "Collapsible",
             type: "checkbox",
             defaultValue: true,
-            codeTemplate: (value) => (value ? "collapsible" : ""),
+            codeTemplate: (value: Record<string, any>) => (value ? "collapsible" : ""),
         },
     ],
-    codeTemplate: (values) => {
+    codeTemplate: (values: Record<string, any>) => {
         const props = Object.entries(values)
             .map(([key, value]) => {
-                const control = accordionConfig.controls.find((c) => c.id === key);
+                const control = accordionConfig.controls.find((c: any) => c.id === key);
                 return control && control.type !== "input" ? control.codeTemplate(value) : "";
             })
             .filter(Boolean)
@@ -51,7 +51,7 @@ export function AccordionVariator() {
     return (
         <ComponentVariator
             config={accordionConfig}
-            component={(props) => (
+            component={(props: any) => (
                 <div className="w-full">
                     <Accordion {...props}>
                         <AccordionItem value="item-1">

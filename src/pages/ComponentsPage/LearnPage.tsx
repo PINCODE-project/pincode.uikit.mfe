@@ -1,9 +1,16 @@
-import { Article, ArticleContent } from "@/components/ui/article/Article";
+import { Article, ArticleContent } from "@pin-code/uikit.lib";
 import { useState } from "react";
-import { InlineCode } from "@/components/ui/article/InlineCode";
+import { InlineCode } from "@pin-code/uikit.lib";
+// import { BlockEditor } from "@pin-code/uikit.lib";
+// import { useCollaboration } from "@pin-code/uikit.lib";
 
 const LearnPage = () => {
     const [step, setStep] = useState<number>(0);
+
+    // const providerState = useCollaboration({
+    //     docId: "1",
+    //     enabled: true,
+    // })
 
     const content: ArticleContent[] = [
         { type: "heading", level: 1, content: "Welcome to Our Enhanced Documentation" },
@@ -76,6 +83,7 @@ const LearnPage = () => {
     return (
         <>
             <Article content={content} />
+            {/*<BlockEditor ydoc={providerState.yDoc} provider={providerState.provider} />*/}
         </>
     );
 };

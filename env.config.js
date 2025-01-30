@@ -7,14 +7,17 @@ const outputConfig = {
 const entryConfig = ["./src/index.tsx"];
 
 const copyPluginPatterns = {
-    patterns: [{ from: "./public/logo192.png" }, { from: "./public/logo512.png" }, { from: "./public/favicon.ico" }, { from: "./public/_redirects" }],
+    patterns: [
+        { from: "./public/logo192.png" },
+        { from: "./public/logo512.png" },
+        { from: "./public/favicon.ico" },
+        { from: "./public/_redirects" },
+    ],
 };
 
 const devServer = {
-    static: [
-        { directory: path.join(__dirname, outputConfig.destPath), },
-    ],
-    port: "5001",
+    static: [{ directory: path.join(__dirname, outputConfig.destPath) }],
+    port: "5100",
     historyApiFallback: true,
 };
 

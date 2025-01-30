@@ -1,37 +1,44 @@
 import * as React from "react";
-import { GalleryVerticalEnd, Search, ChevronDown } from "lucide-react";
+import { GalleryVerticalEnd, Search } from "lucide-react";
 
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import {
+    Input,
+    Label,
     Sidebar,
     SidebarContent,
+    SidebarFooter,
     SidebarGroup,
     SidebarGroupContent,
-    SidebarGroupLabel,
     SidebarHeader,
     SidebarMenu,
-    SidebarMenuItem,
     SidebarMenuButton,
-    SidebarFooter,
-} from "@/components/ui/sidebar";
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
+    SidebarMenuItem,
+    SidebarNavigation,
+    ThemeToggle,
+} from "@pin-code/uikit.lib";
 import { ComponentsRouter } from "@/router/routes/components";
 import { Link } from "react-router-dom";
-import { ThemeToggle } from "@/components/ui/theme-toggle";
 
-const navItems = [
+type NavItem = {
+    title: string;
+    url: string;
+    subItems?: {
+        title: string;
+        url: string;
+    }[];
+    badge?: React.ReactNode;
+    icon?: React.ReactNode;
+};
+const navItems: NavItem[] = [
     {
-        title: "Introduction",
+        title: "Добро пожаловать",
         url: "/",
+        icon: "👋",
     },
     {
-        title: "Начало работы",
-        url: "/getting-started",
-        subItems: [
-            { title: "Installation", url: "/getting-started#installation" },
-            { title: "Configuration", url: "/getting-started#configuration" },
-        ],
+        title: "Установка",
+        url: "/installation",
+        icon: "🛠️",
     },
     {
         title: "Компоненты",
@@ -40,16 +47,12 @@ const navItems = [
             title: component,
             url: `/components${path}`,
         })),
-    },
-    {
-        title: "API Reference",
-        url: "/api-reference",
+        badge: Object.entries(ComponentsRouter).length,
+        icon: "💻",
     },
 ];
 
 export function DocsSidebar() {
-    const [activeItem, setActiveItem] = React.useState("/");
-
     return (
         <Sidebar>
             <SidebarHeader>
@@ -61,7 +64,7 @@ export function DocsSidebar() {
                                     <GalleryVerticalEnd className="size-4" />
                                 </div>
                                 <div className="flex flex-col gap-0.5 leading-none">
-                                    <span className="font-semibold">Пин-код UI</span>
+                                    <span className="font-semibold">ПИН-КОД UI</span>
                                     <span className="">v1.0.0</span>
                                 </div>
                             </Link>
@@ -81,50 +84,7 @@ export function DocsSidebar() {
                 </form>
             </SidebarHeader>
             <SidebarContent className="overflow-x-hidden">
-                <SidebarGroup>
-                    <SidebarGroupLabel>Navigation</SidebarGroupLabel>
-                    <SidebarGroupContent>
-                        <SidebarMenu>
-                            {navItems.map((item) => (
-                                <SidebarMenuItem key={item.url}>
-                                    {item.subItems ? (
-                                        <Collapsible>
-                                            <CollapsibleTrigger asChild>
-                                                <SidebarMenuButton isActive={activeItem === item.url}>
-                                                    {item.title}
-                                                    <ChevronDown className="ml-auto h-4 w-4" />
-                                                </SidebarMenuButton>
-                                            </CollapsibleTrigger>
-                                            <CollapsibleContent>
-                                                <SidebarMenu className="mt-2 ml-4">
-                                                    {item.subItems.map((subItem) => (
-                                                        <SidebarMenuItem key={subItem.url}>
-                                                            <SidebarMenuButton
-                                                                asChild
-                                                                isActive={activeItem === subItem.url}
-                                                                onClick={() => setActiveItem(subItem.url)}
-                                                            >
-                                                                <Link to={subItem.url}>{subItem.title}</Link>
-                                                            </SidebarMenuButton>
-                                                        </SidebarMenuItem>
-                                                    ))}
-                                                </SidebarMenu>
-                                            </CollapsibleContent>
-                                        </Collapsible>
-                                    ) : (
-                                        <SidebarMenuButton
-                                            asChild
-                                            isActive={activeItem === item.url}
-                                            onClick={() => setActiveItem(item.url)}
-                                        >
-                                            <Link to={item.url}>{item.title}</Link>
-                                        </SidebarMenuButton>
-                                    )}
-                                </SidebarMenuItem>
-                            ))}
-                        </SidebarMenu>
-                    </SidebarGroupContent>
-                </SidebarGroup>
+                <SidebarNavigation label={"Документация"} items={navItems} />
             </SidebarContent>
             <SidebarFooter>
                 <ThemeToggle />

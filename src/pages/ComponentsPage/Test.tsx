@@ -1,7 +1,14 @@
-import { ArticleContent } from "@/components/ui/article/Article";
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
-import { Card, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
+import {
+    ArticleContent,
+    Button,
+    Card,
+    CardContent,
+    Carousel,
+    CarouselContent,
+    CarouselItem,
+    CarouselNext,
+    CarouselPrevious,
+} from "@pin-code/uikit.lib";
 
 const AccordionArticle: ArticleContent[] = [
     { type: "heading", level: 1, content: "Accordion" },

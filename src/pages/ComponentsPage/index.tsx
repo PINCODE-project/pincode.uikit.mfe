@@ -1,6 +1,6 @@
-import { Article, ArticleContent } from "@/components/ui/article/Article";
+import { Article, ArticleContent } from "@pin-code/uikit.lib";
 import { FC } from "react";
-import { TableOfContentItem, TableOfContents } from "@/components/ui/article/TableOfContents";
+import { TableOfContentItem, TableOfContents } from "@pin-code/uikit.lib";
 
 type Props = {
     content: ArticleContent[];

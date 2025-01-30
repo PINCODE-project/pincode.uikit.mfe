@@ -12,6 +12,10 @@ export const ComponentsRouter = {
 
 export const componentsRouteConfig: ConfigRouteProps[] = [
     {
+        path: "",
+        element: <ComponentsPage content={AccordionArticle} />,
+    },
+    {
         path: ComponentsRouter.Accordion,
         element: <ComponentsPage content={AccordionArticle} />,
     },

@@ -1,6 +1,6 @@
-import { Button } from "@/components/ui/button";
-import { ComponentVariator } from "@/components/ui/component-variator/ComponentVariator";
-import type { ComponentConfig } from "@/components/ui/component-variator/types";
+import { Button } from "@pin-code/uikit.lib";
+import { ComponentVariator } from "@pin-code/uikit.lib";
+import type { ComponentConfig } from "@pin-code/uikit.lib";
 
 const buttonConfig: ComponentConfig = {
     name: "Button",
@@ -12,7 +12,7 @@ const buttonConfig: ComponentConfig = {
             type: "input",
             defaultValue: "Click me",
             placeholder: "Enter button text",
-            codeTemplate: (value) => `"${value}"`,
+            codeTemplate: (value: any) => `"${value}"`,
         },
         {
             id: "variant",
@@ -27,7 +27,7 @@ const buttonConfig: ComponentConfig = {
                 { label: "Ghost", value: "ghost" },
                 { label: "Link", value: "link" },
             ],
-            codeTemplate: (value) => `variant="${value}"`,
+            codeTemplate: (value: any) => `variant="${value}"`,
         },
         {
             id: "size",
@@ -39,20 +39,20 @@ const buttonConfig: ComponentConfig = {
                 { label: "Small", value: "sm" },
                 { label: "Large", value: "lg" },
             ],
-            codeTemplate: (value) => `size="${value}"`,
+            codeTemplate: (value: any) => `size="${value}"`,
         },
         {
             id: "disabled",
             label: "Disabled",
             type: "checkbox",
             defaultValue: false,
-            codeTemplate: (value) => (value ? "disabled" : ""),
+            codeTemplate: (value: any) => (value ? "disabled" : ""),
         },
     ],
-    codeTemplate: (values) => {
+    codeTemplate: (values: Record<string, any>) => {
         const props = Object.entries(values)
             .map(([key, value]) => {
-                const control = buttonConfig.controls.find((c) => c.id === key);
+                const control = buttonConfig.controls.find((c: any) => c.id === key);
                 return control && control.type !== "input" ? control.codeTemplate(value) : "";
             })
             .filter(Boolean)
@@ -65,5 +65,5 @@ const buttonConfig: ComponentConfig = {
 };
 
 export function ButtonVariator() {
-    return <ComponentVariator config={buttonConfig} component={(props) => <Button {...props} />} />;
+    return <ComponentVariator config={buttonConfig} component={(props: any) => <Button {...props} />} />;
 }
