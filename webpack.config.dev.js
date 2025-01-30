@@ -24,29 +24,6 @@ module.exports = (env, options) => {
                         plugins: ["@babel/plugin-syntax-dynamic-import"],
                     },
                 },
-                // {
-                //     test: /\.scss$/,
-                //     use: [
-                //         "style-loader",
-                //         {
-                //             loader: "css-loader",
-                //             options: {
-                //                 url: false,
-                //             },
-                //         },
-                //         {
-                //             loader: "postcss-loader",
-                //             options: {
-                //                 postcssOptions: {
-                //                     plugins: [
-                //                         ["postcss-preset-env", { stage: 1, features: { "is-pseudo-class": false } }],
-                //                     ],
-                //                 },
-                //             },
-                //         },
-                //         "sass-loader",
-                //     ],
-                // },
                 {
                     test: /\.s?css$/i,
                     use: ["style-loader", "css-loader", "postcss-loader", "sass-loader"],

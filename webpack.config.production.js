@@ -109,6 +109,14 @@ module.exports = (env, options) => {
                     ],
                 },
                 {
+                    test: /\.js$/,
+                    loader: "babel-loader",
+                    exclude: /node_modules/,
+                    options: {
+                        plugins: ["@babel/plugin-syntax-dynamic-import"],
+                    },
+                },
+                {
                     test: /\.(?:ico|gif|png|jpg|jpeg|svg)$/i,
                     type: "javascript/auto",
                     loader: "file-loader",
@@ -158,7 +166,6 @@ module.exports = (env, options) => {
                 inject: true,
                 minify: false,
             }),
-            new ModuleFederationPlugin(federationConfig),
             new CopyPlugin(copyPluginPatterns),
         ],
     };
