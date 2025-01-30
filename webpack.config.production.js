@@ -15,25 +15,8 @@ module.exports = (env, options) => {
                     exclude: /node_modules/,
                 },
                 {
-                    test: /\.scss$/,
-                    use: [
-                        "style-loader",
-                        {
-                            loader: "css-loader",
-                            options: {
-                                url: false,
-                            },
-                        },
-                        {
-                            loader: "postcss-loader",
-                            options: {
-                                postcssOptions: {
-                                    plugins: [["postcss-preset-env"]],
-                                },
-                            },
-                        },
-                        "sass-loader",
-                    ],
+                    test: /\.s?css$/i,
+                    use: ["style-loader", "css-loader", "postcss-loader", "sass-loader"],
                 },
                 {
                     test: /\.js$/,
